@@ -25,5 +25,4 @@ class main(QMainWindow):
 if __name__ == "__main__":
     app = QApplication([])
     widget = main()
-    widget.show()
     sys.exit(app.exec_())
