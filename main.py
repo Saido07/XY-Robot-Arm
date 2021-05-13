@@ -3,26 +3,31 @@ import os
 from pathlib import Path
 import sys
 
-from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import QFile
-from PySide6.QtUiTools import QUiLoader
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import * 
+from PyQt5.QtCore import * 
+
+from PyQt5 import QtGui, QtWidgets, uic
+from PyQt5 import QtCore
+from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtGui import QImage,QPixmap
+from PyQt5.QtWidgets import  QWidget, QMainWindow
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QFile
+from PyQt5 import QtWidgets, uic
+import cv2
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QImage, QPalette, QBrush
 
 
 class main(QMainWindow):
     def __init__(self):
         super(main, self).__init__()
-        self.load_ui()
-
-    def load_ui(self):
-        loader = QUiLoader()
-        path = os.fspath(Path(__file__).resolve().parent / "form.ui")
-        ui_file = QFile(path)
-        ui_file.open(QFile.ReadOnly)
-        loader.load(ui_file, self)
-        ui_file.close()
-
+        self.setFixedSize(1000, 600)
+        call=uic.loadUi('form.ui',self)
 
 if __name__ == "__main__":
-    app = QApplication([])
+    app = QApplication(sys.argv)
     widget = main()
+    widget.show()
     sys.exit(app.exec_())
