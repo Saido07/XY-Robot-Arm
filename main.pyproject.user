@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.15.0, 2021-05-14T15:48:44. -->
+<!-- Written by QtCreator 4.15.0, 2021-05-14T17:45:15. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -175,16 +175,16 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">D:/TAU/3. SINIF 2. DÖNEM/MEC 308 - Endüstriyel Robotik/projekt/projektmec308/mec308project/main.py</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration.D:/TAU/3. SINIF 2. DÖNEM/MEC 308 - Endüstriyel Robotik/projekt/projektmec308/mec308project/main.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/TAU/3. SINIF 2. DÖNEM/MEC 308 - Endüstriyel Robotik/projekt/projektmec308/mec308project/main.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">D:/TAU/3. SINIF 2. DÖNEM/MEC 308 - Endüstriyel Robotik/projekt/mec308app/mec308project/main.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration.D:/TAU/3. SINIF 2. DÖNEM/MEC 308 - Endüstriyel Robotik/projekt/mec308app/mec308project/main.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/TAU/3. SINIF 2. DÖNEM/MEC 308 - Endüstriyel Robotik/projekt/mec308app/mec308project/main.py</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{2c922c8e-78d5-4b1d-9c28-348797b7cbee}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">D:\TAU\3. SINIF 2. DÖNEM\MEC 308 - Endüstriyel Robotik\projekt\projektmec308\mec308project\main.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">D:\TAU\3. SINIF 2. DÖNEM\MEC 308 - Endüstriyel Robotik\projekt\mec308app\mec308project\main.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">D:/TAU/3. SINIF 2. DÖNEM/MEC 308 - Endüstriyel Robotik/projekt/projektmec308/mec308project</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">D:/TAU/3. SINIF 2. DÖNEM/MEC 308 - Endüstriyel Robotik/projekt/mec308app/mec308project</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

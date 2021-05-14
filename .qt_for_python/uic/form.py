@@ -17,7 +17,7 @@ class Ui_mainWin(object):
     def setupUi(self, mainWin):
         if not mainWin.objectName():
             mainWin.setObjectName(u"mainWin")
-        mainWin.setEnabled(False)
+        mainWin.setEnabled(True)
         mainWin.resize(1000, 600)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -32,22 +32,24 @@ class Ui_mainWin(object):
         self.centralwidget.setMinimumSize(QSize(1000, 800))
         self.oriImage = QLabel(self.centralwidget)
         self.oriImage.setObjectName(u"oriImage")
-        self.oriImage.setGeometry(QRect(60, 140, 261, 211))
+        self.oriImage.setGeometry(QRect(60, 140, 260, 210))
         self.oriImage.setStyleSheet(u"background : grey\n"
 "")
         self.workedImage = QLabel(self.centralwidget)
         self.workedImage.setObjectName(u"workedImage")
-        self.workedImage.setGeometry(QRect(390, 140, 261, 211))
+        self.workedImage.setGeometry(QRect(390, 140, 260, 210))
         self.workedImage.setStyleSheet(u"background : grey\n"
 "")
         self.camOn = QPushButton(self.centralwidget)
         self.camOn.setObjectName(u"camOn")
         self.camOn.setGeometry(QRect(90, 380, 201, 31))
+        self.camOn.setFocusPolicy(Qt.StrongFocus)
         self.camOn.setStyleSheet(u"border-image:url(camOn.png); \n"
 "")
         self.sendGcode = QPushButton(self.centralwidget)
         self.sendGcode.setObjectName(u"sendGcode")
         self.sendGcode.setGeometry(QRect(410, 380, 201, 31))
+        self.sendGcode.setFocusPolicy(Qt.StrongFocus)
         self.sendGcode.setStyleSheet(u"border-image:url(sendeGcode.png); \n"
 "")
         self.infoScreen = QListWidget(self.centralwidget)
@@ -63,9 +65,6 @@ class Ui_mainWin(object):
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 1000, 21))
         mainWin.setMenuBar(self.menubar)
-        self.statusbar = QStatusBar(mainWin)
-        self.statusbar.setObjectName(u"statusbar")
-        mainWin.setStatusBar(self.statusbar)
 
         self.retranslateUi(mainWin)
 
@@ -78,5 +77,10 @@ class Ui_mainWin(object):
         self.workedImage.setText("")
         self.camOn.setText("")
         self.sendGcode.setText("")
+        self.plainTextEdit.setPlainText(QCoreApplication.translate("mainWin", u"Serial Port", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("mainWin", u"COM 4", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("mainWin", u"COM 5", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate("mainWin", u"COM 6", None))
+        self.comboBox.setItemText(3, QCoreApplication.translate("mainWin", u"com 7", None))
     # retranslateUi
 
