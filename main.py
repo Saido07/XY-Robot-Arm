@@ -31,9 +31,8 @@ class main(QMainWindow):
         self.setFixedSize(1000, 600)
         call=uic.loadUi('form.ui',self)
         call.camOn.clicked.connect(self.camClicked)
-        call.sendGcode.connect(self.sendGClicked)
-        call.camOn.setVisible(False)
-        call.sendGcode.setVisible(False)
+        call.sendGcode.clicked.connect(self.sendGClicked)
+     
 
     def sendGClicked(self):
         print("sendGCodeClicked")
@@ -150,9 +149,7 @@ class main(QMainWindow):
         self.oriImage.setVisible(True)
         self.logic=0    
 
-        QListWidget *comPortsList = new QListWidget(); #list
-        QListWidgetItem *comPort = new QListWidgetItem();  #listitem
-        comPortsList->setItemWidget(comPort,new QRadioButton("Com1"));
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
