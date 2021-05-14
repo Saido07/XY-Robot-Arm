@@ -25,10 +25,14 @@ class main(QMainWindow):
         super(main, self).__init__()
         self.setFixedSize(1000, 600)
         call=uic.loadUi('form.ui',self)
+        
+        #Berkay Buradaasdasd
+        #Berkay Buradaasdasd
+        #Berkay Buradaasdasd
+        #Berkay Buradaasdasd
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = main()
     widget.show()
     sys.exit(app.exec_())
-    #saittttttt
