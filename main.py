@@ -21,10 +21,14 @@ from PyQt5.QtGui import QImage, QPalette, QBrush
 
 
 class main(QMainWindow):
-      def __init__(self):
+    def __init__(self):
         super(main, self).__init__()
         self.setFixedSize(1000, 600)
         call=uic.loadUi('form.ui',self)
+
+        QListWidget *comPortsList = new QListWidget(); #list
+        QListWidgetItem *comPort = new QListWidgetItem();  #listitem
+        comPortsList->setItemWidget(comPort,new QRadioButton("Com1"));
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
