@@ -77,9 +77,6 @@ class Ui_mainWin(object):
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 1000, 21))
         mainWin.setMenuBar(self.menubar)
-        self.statusbar = QStatusBar(mainWin)
-        self.statusbar.setObjectName(u"statusbar")
-        mainWin.setStatusBar(self.statusbar)
 
         self.retranslateUi(mainWin)
 

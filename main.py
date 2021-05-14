@@ -32,7 +32,6 @@ class main(QMainWindow):
         call=uic.loadUi('form.ui',self)
         call.camOn.clicked.connect(self.camClicked)
         call.sendGcode.clicked.connect(self.sendGClicked)
-     
 
     def sendGClicked(self):
         print("sendGCodeClicked")
@@ -86,7 +85,8 @@ class main(QMainWindow):
         print("camClicked")
         self.logic=0
         count=0
-        oriImg=self.oriImage.setVisible(True)
+        self.oriImage.setVisible(True)
+        self.workedImage.setVisible(True)
         print("Cam ON")
         cam = cv2.VideoCapture(0,cv2.CAP_DSHOW)
         kernel = np.ones((5,5), np.uint8)
@@ -97,8 +97,10 @@ class main(QMainWindow):
             gray_frame = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             blur = cv2.GaussianBlur(gray_frame, (5,5), 0)
             canny = cv2.Canny(blur , 70, 200)
-            self.oriImg.displayImage(img,1)
-            self.workedImage.displayImage(canny,1)
+
+            self.displayImage(self.oriImage,img,1)
+            self.displayImage(self.workedImage,canny,1)
+            #self.displayImage(canny,1)
             cv2.waitKey()
 
             cnts = cv2.findContours(canny.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -113,7 +115,6 @@ class main(QMainWindow):
                     break
             print("Die Kanten wird erkannt.")
             #cv2.drawContours(frame, [screenCnt], -1, (0, 0, 255), 4)
-            frame_resized_3 = cv2.resize(img, (500, 400))
             #cv2.imshow("Die Kanten", frame_resized_3)
 
             #warped = four_point_transform(frame, screenCnt.reshape(4, 2))
@@ -147,9 +148,22 @@ class main(QMainWindow):
         self.imgLabel.setVisible(False)
         self.sendGcode.setVisible(True)
         self.oriImage.setVisible(True)
-        self.logic=0    
+        self.logic=0 
 
+    def displayImage(self,lbl, img,window=1):
+        qformat=QImage.Format_Indexed8
 
+        if len(img.shape)==3:
+            if(img.shape[2])==4:
+                qformat=QImage.Format_RGBA8888
+
+            else:
+                qformat=QImage.Format_RGB888
+
+        img=QImage(img,img.shape[1],img.shape[0],qformat)
+        img=img.rgbSwapped()
+        lbl.setPixmap(QPixmap.fromImage(img))
+        lbl.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
