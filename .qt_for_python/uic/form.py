@@ -12,7 +12,6 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
-
 class Ui_mainWin(object):
     def setupUi(self, mainWin):
         if not mainWin.objectName():
