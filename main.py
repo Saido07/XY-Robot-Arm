@@ -21,7 +21,7 @@ from PyQt5.QtGui import QImage, QPalette, QBrush
 
 
 class main(QMainWindow):
-    def __init__(self):
+      def __init__(self):
         super(main, self).__init__()
         self.setFixedSize(1000, 600)
         call=uic.loadUi('form.ui',self)
