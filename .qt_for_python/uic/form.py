@@ -12,28 +12,37 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
-
-class Ui_main(object):
-    def setupUi(self, main):
-        if not main.objectName():
-            main.setObjectName(u"main")
-        main.resize(800, 600)
-        self.centralwidget = QWidget(main)
+class Ui_mainWin(object):
+    def setupUi(self, mainWin):
+        if not mainWin.objectName():
+            mainWin.setObjectName(u"mainWin")
+        mainWin.setEnabled(False)
+        mainWin.resize(1000, 800)
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(mainWin.sizePolicy().hasHeightForWidth())
+        mainWin.setSizePolicy(sizePolicy)
+        mainWin.setMinimumSize(QSize(100, 100))
+        mainWin.setBaseSize(QSize(100, 100))
+        self.centralwidget = QWidget(mainWin)
         self.centralwidget.setObjectName(u"centralwidget")
-        main.setCentralWidget(self.centralwidget)
-        self.menubar = QMenuBar(main)
+        self.centralwidget.setMinimumSize(QSize(1000, 800))
+        mainWin.setCentralWidget(self.centralwidget)
+        self.menubar = QMenuBar(mainWin)
         self.menubar.setObjectName(u"menubar")
-        main.setMenuBar(self.menubar)
-        self.statusbar = QStatusBar(main)
+        self.menubar.setGeometry(QRect(0, 0, 1000, 20))
+        mainWin.setMenuBar(self.menubar)
+        self.statusbar = QStatusBar(mainWin)
         self.statusbar.setObjectName(u"statusbar")
-        main.setStatusBar(self.statusbar)
+        mainWin.setStatusBar(self.statusbar)
 
-        self.retranslateUi(main)
+        self.retranslateUi(mainWin)
 
-        QMetaObject.connectSlotsByName(main)
+        QMetaObject.connectSlotsByName(mainWin)
     # setupUi
 
-    def retranslateUi(self, main):
-        main.setWindowTitle(QCoreApplication.translate("main", u"main", None))
+    def retranslateUi(self, mainWin):
+        mainWin.setWindowTitle(QCoreApplication.translate("mainWin", u"main", None))
     # retranslateUi
 
