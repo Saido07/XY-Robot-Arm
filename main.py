@@ -150,6 +150,10 @@ class main(QMainWindow):
         self.oriImage.setVisible(True)
         self.logic=0    
 
+        QListWidget *comPortsList = new QListWidget(); #list
+        QListWidgetItem *comPort = new QListWidgetItem();  #listitem
+        comPortsList->setItemWidget(comPort,new QRadioButton("Com1"));
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = main()
