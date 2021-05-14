@@ -3,14 +3,14 @@
 ################################################################################
 ## Form generated from reading UI file 'form.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.0.4
+## Created by: Qt User Interface Compiler version 5.15.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import *
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
 
 
 class Ui_mainWin(object):
@@ -26,33 +26,30 @@ class Ui_mainWin(object):
         mainWin.setSizePolicy(sizePolicy)
         mainWin.setMinimumSize(QSize(100, 100))
         mainWin.setBaseSize(QSize(100, 100))
-        mainWin.setFocusPolicy(Qt.NoFocus)
         mainWin.setStyleSheet(u"background-image: url(back.png);")
         self.centralwidget = QWidget(mainWin)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setMinimumSize(QSize(1000, 800))
         self.oriImage = QLabel(self.centralwidget)
         self.oriImage.setObjectName(u"oriImage")
-        self.oriImage.setGeometry(QRect(60, 140, 261, 211))
-        self.oriImage.setMouseTracking(True)
+        self.oriImage.setGeometry(QRect(60, 140, 260, 210))
         self.oriImage.setStyleSheet(u"background : grey\n"
 "")
         self.workedImage = QLabel(self.centralwidget)
         self.workedImage.setObjectName(u"workedImage")
-        self.workedImage.setGeometry(QRect(390, 140, 261, 211))
+        self.workedImage.setGeometry(QRect(390, 140, 260, 210))
         self.workedImage.setStyleSheet(u"background : grey\n"
 "")
         self.camOn = QPushButton(self.centralwidget)
         self.camOn.setObjectName(u"camOn")
-        self.camOn.setEnabled(True)
         self.camOn.setGeometry(QRect(90, 380, 201, 31))
+        self.camOn.setFocusPolicy(Qt.StrongFocus)
         self.camOn.setStyleSheet(u"border-image:url(camOn.png); \n"
 "")
-        self.camOn.setCheckable(False)
         self.sendGcode = QPushButton(self.centralwidget)
         self.sendGcode.setObjectName(u"sendGcode")
-        self.sendGcode.setEnabled(False)
         self.sendGcode.setGeometry(QRect(410, 380, 201, 31))
+        self.sendGcode.setFocusPolicy(Qt.StrongFocus)
         self.sendGcode.setStyleSheet(u"border-image:url(sendeGcode.png); \n"
 "")
         self.infoScreen = QListWidget(self.centralwidget)
@@ -60,13 +57,25 @@ class Ui_mainWin(object):
         self.infoScreen.setGeometry(QRect(760, 20, 221, 321))
         self.infoScreen.setStyleSheet(u"background: rgb(242, 241, 241);\n"
 "")
-        self.comPortsLst = QListWidget(self.centralwidget)
-        self.comPortsLst.setObjectName(u"comPortsLst")
-        self.comPortsLst.setGeometry(QRect(770, 360, 171, 151))
+        self.plainTextEdit = QPlainTextEdit(self.centralwidget)
+        self.plainTextEdit.setObjectName(u"plainTextEdit")
+        self.plainTextEdit.setGeometry(QRect(800, 380, 111, 31))
+        font = QFont()
+        font.setUnderline(True)
+        self.plainTextEdit.setFont(font)
+        self.plainTextEdit.setStyleSheet(u"border : none;\n"
+"outline : none;")
+        self.comboBox = QComboBox(self.centralwidget)
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+        self.comboBox.setGeometry(QRect(800, 440, 111, 22))
         mainWin.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(mainWin)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1000, 20))
+        self.menubar.setGeometry(QRect(0, 0, 1000, 21))
         mainWin.setMenuBar(self.menubar)
 
         self.retranslateUi(mainWin)
@@ -80,5 +89,11 @@ class Ui_mainWin(object):
         self.workedImage.setText("")
         self.camOn.setText("")
         self.sendGcode.setText("")
+        self.plainTextEdit.setPlainText(QCoreApplication.translate("mainWin", u"Serial Port", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("mainWin", u"COM 4", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("mainWin", u"COM 5", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate("mainWin", u"COM 6", None))
+        self.comboBox.setItemText(3, QCoreApplication.translate("mainWin", u"com 7", None))
+
     # retranslateUi
 
