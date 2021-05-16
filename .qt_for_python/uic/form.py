@@ -3,14 +3,14 @@
 ################################################################################
 ## Form generated from reading UI file 'form.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 6.0.4
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
 
 
 class Ui_mainWin(object):
@@ -60,10 +60,6 @@ class Ui_mainWin(object):
 "background:none;\n"
 "")
         self.comboBox = QComboBox(self.centralwidget)
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setGeometry(QRect(1080, 440, 111, 22))
         self.takePhoto = QPushButton(self.centralwidget)
@@ -84,13 +80,16 @@ class Ui_mainWin(object):
         font = QFont()
         font.setPointSize(10)
         font.setBold(True)
-        font.setWeight(75)
         self.label.setFont(font)
         self.label.setStyleSheet(u"background: transparent")
+        self.refreshPorts = QPushButton(self.centralwidget)
+        self.refreshPorts.setObjectName(u"refreshPorts")
+        self.refreshPorts.setGeometry(QRect(1200, 440, 22, 22))
+        self.refreshPorts.setStyleSheet(u"background : none")
         mainWin.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(mainWin)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1300, 21))
+        self.menubar.setGeometry(QRect(0, 0, 1300, 20))
         mainWin.setMenuBar(self.menubar)
 
         self.retranslateUi(mainWin)
@@ -104,13 +103,9 @@ class Ui_mainWin(object):
         self.workedImage.setText("")
         self.camOn.setText("")
         self.sendGcode.setText("")
-        self.comboBox.setItemText(0, QCoreApplication.translate("mainWin", u"COM 4", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("mainWin", u"COM 5", None))
-        self.comboBox.setItemText(2, QCoreApplication.translate("mainWin", u"COM 6", None))
-        self.comboBox.setItemText(3, QCoreApplication.translate("mainWin", u"com 7", None))
-
         self.takePhoto.setText("")
         self.infoScreen.setText(QCoreApplication.translate("mainWin", u"TextLabel", None))
         self.label.setText(QCoreApplication.translate("mainWin", u"Serial Port : ", None))
+        self.refreshPorts.setText("")
     # retranslateUi
 

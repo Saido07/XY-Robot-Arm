@@ -223,7 +223,8 @@ background : rgb(242, 241, 241)</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background : none</string>
+     <string notr="true">
+</string>
     </property>
     <property name="text">
      <string/>
