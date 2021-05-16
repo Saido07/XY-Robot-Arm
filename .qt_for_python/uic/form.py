@@ -48,6 +48,7 @@ class Ui_mainWin(object):
         self.camOn.setGeometry(QRect(200, 520, 201, 31))
         self.camOn.setFocusPolicy(Qt.StrongFocus)
         self.camOn.setStyleSheet(u"border-image:url(camOn.png); \n"
+"background:none;\n"
 "")
         self.camOn.setCheckable(False)
         self.sendGcode = QPushButton(self.centralwidget)
@@ -56,6 +57,7 @@ class Ui_mainWin(object):
         self.sendGcode.setGeometry(QRect(660, 520, 201, 31))
         self.sendGcode.setFocusPolicy(Qt.StrongFocus)
         self.sendGcode.setStyleSheet(u"border-image:url(sendeGcode.png); \n"
+"background:none;\n"
 "")
         self.comboBox = QComboBox(self.centralwidget)
         self.comboBox.addItem("")
@@ -82,12 +84,13 @@ class Ui_mainWin(object):
         font = QFont()
         font.setPointSize(10)
         font.setBold(True)
+        font.setWeight(75)
         self.label.setFont(font)
         self.label.setStyleSheet(u"background: transparent")
         mainWin.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(mainWin)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1300, 20))
+        self.menubar.setGeometry(QRect(0, 0, 1300, 21))
         mainWin.setMenuBar(self.menubar)
 
         self.retranslateUi(mainWin)

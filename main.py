@@ -44,7 +44,7 @@ class main(QMainWindow):
         call.takePhoto.setIcon(image)
         size = QSize(100, 100)
         call.takePhoto.setIconSize(size)
-        call.takePhoto.setStyleSheet("border: 0px;")
+        call.takePhoto.setStyleSheet("background:transparent")
 
     def removeComment(self, string):
         if (string.find(';')==-1):
