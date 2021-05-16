@@ -52,7 +52,7 @@ class Ui_mainWin(object):
         self.camOn.setCheckable(False)
         self.sendGcode = QPushButton(self.centralwidget)
         self.sendGcode.setObjectName(u"sendGcode")
-        self.sendGcode.setEnabled(False)
+        self.sendGcode.setEnabled(True)
         self.sendGcode.setGeometry(QRect(660, 520, 201, 31))
         self.sendGcode.setFocusPolicy(Qt.StrongFocus)
         self.sendGcode.setStyleSheet(u"border-image:url(sendeGcode.png); \n"
