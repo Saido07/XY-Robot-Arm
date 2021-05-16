@@ -164,7 +164,7 @@ class main(QMainWindow):
         img=img.rgbSwapped()
         lbl.setPixmap(QPixmap.fromImage(img))
         lbl.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
-
+        print("deneme")
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = main()
