@@ -133,47 +133,11 @@
      <string/>
     </property>
    </widget>
-   <widget class="QListWidget" name="infoScreen">
-    <property name="geometry">
-     <rect>
-      <x>1060</x>
-      <y>50</y>
-      <width>221</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: rgb(242, 241, 241);
-</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
-    <property name="geometry">
-     <rect>
-      <x>1120</x>
-      <y>400</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <underline>true</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border : none;
-outline : none;</string>
-    </property>
-    <property name="plainText">
-     <string>Serial Port</string>
-    </property>
-   </widget>
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>1120</x>
-      <y>490</y>
+      <x>1080</x>
+      <y>440</y>
       <width>111</width>
       <height>22</height>
      </rect>
@@ -225,6 +189,46 @@ outline : none;</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="infoScreen">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>52</y>
+      <width>181</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(242, 241, 241);
+background : rgb(242, 241, 241)</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>410</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent</string>
+    </property>
+    <property name="text">
+     <string>Serial Port : </string>
     </property>
    </widget>
   </widget>
