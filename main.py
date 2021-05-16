@@ -33,6 +33,10 @@ class main(QMainWindow):
         call.camOn.clicked.connect(self.camClicked)
         call.sendGcode.clicked.connect(self.sendGClicked)
         call.takePhoto.clicked.connect(self.takePhotoClicked)
+        self.infoScreen.setText("--")
+        self.infoScreen.setFrameStyle(QFrame.Panel | QFrame.Sunken)
+        self.infoScreen.setAlignment(Qt.AlignTop | Qt.AlignLeft)
+        self.infoScreen.setWordWrap(True)
         self.camOn.setVisible(True)
         self.sendGcode.setVisible(True)
         self.takePhoto.setVisible(False)
@@ -50,6 +54,7 @@ class main(QMainWindow):
     
     def camClicked(self):
         print("camClicked")
+        self.infoScreen.setText(self.infoScreen.text()+"\n--Die Kamera war eingeschaltet.")  
         self.logic=0
         count=0
         self.oriImage.setVisible(True)
@@ -83,7 +88,7 @@ class main(QMainWindow):
                 if len(approx) == 4:
                     screenCnt = approx
                     break
-            print("Die Kanten wird erkannt.")
+            #print("Die Kanten wird erkannt.")
             #cv2.drawContours(frame, [screenCnt], -1, (0, 0, 255), 4)
             #cv2.imshow("Die Kanten", frame_resized_3)
 
@@ -107,6 +112,7 @@ class main(QMainWindow):
                 break                
             
             if self.logic==1:
+                self.infoScreen.setText(self.infoScreen.text()+"\n--Das Foto wurde gemacht.")  
                 self.displayImage(self.oriImage,img,1)
                 self.displayImage(self.workedImage,canny,1)
                 self.logic=2
@@ -119,7 +125,7 @@ class main(QMainWindow):
         self.sendGcode.setVisible(True)
         self.oriImage.setVisible(True)
         self.logic=0 
-
+    
     def displayImage(self,lbl, img,window=1):
         qformat=QImage.Format_Indexed8
 
@@ -144,6 +150,7 @@ class main(QMainWindow):
 
 
     def sendG(self, com, file):
+        self.infoScreen.setText(self.infoScreen.text()+"\n--Der G-Code-Sendevorgang wurde gestartet und Druckvorgang wurde gestartet.")
         print("sendGCodeClicked")
         parser = argparse.ArgumentParser(description='This is a basic gcode sender. http://crcibernetica.com')
         #parser.add_argument('-p','--port',help='Input USB port',required=True)
@@ -152,38 +159,44 @@ class main(QMainWindow):
         args.port=com
         args.file=file
         ## show values ##
+        self.infoScreen.setText(self.infoScreen.text()+"\n--USB Port: %s" % args.port)
+        self.infoScreen.setText(self.infoScreen.text()+"\n--Gcode file: %s" % args.file)
         print ("USB Port: %s" % args.port )
         print ("Gcode file: %s" % args.file )
         # Open serial port
         #s = serial.Serial('/dev/ttyACM0',115200)
-        s = serial.Serial(args.port,9600)
-
-        
-        # Open g-code file
-        #f = open('/media/UNTITLED/shoulder.g','r');
-        f = open(args.file,'r')
-        # Wake up 
-        #s.write("\r\n\r\n") # Hit enter a few times to wake the Printrbot
-        time.sleep(2)   # Wait for Printrbot to initialize
-        s.flushInput()  # Flush startup text in serial input
-        
-        # Stream g-code
-        for line in f:
-            l = self.removeComment(line)
-            l = l.strip() # Strip all EOL characters for streaming
-            print(l)
-            if  (l.isspace()==False and len(l)>0) :
-                s.write((l + '\n').encode()) # Send g-code block
-                grbl_out = s.readline() # Wait for response with carriage return
-                print(grbl_out)
-        print("Robot görevi tamamladı!")     
-        # Close file and serial port
-        f.close()
-        s.close()
-
+        try:
+            s = serial.Serial(args.port,9600)
+            # Open g-code file
+            #f = open('/media/UNTITLED/shoulder.g','r');
+            try:
+                f = open(args.file,'r')
+                time.sleep(2)   # Wait for Printrbot to initialize
+                s.flushInput()  # Flush startup text in serial input
+                a=True
+                for line in f:
+                    l = self.removeComment(line)
+                    l = l.strip() # Strip all EOL characters for streaming
+                    if a==True:
+                        self.infoScreen.setText(self.infoScreen.text()+"\n--Druckvorgang wurde gestartet.")
+                        a=False
+                    print(l)
+                    if  (l.isspace()==False and len(l)>0) :
+                        s.write((l + '\n').encode()) # Send g-code block
+                        grbl_out = s.readline() # Wait for response with carriage return
+                        print(grbl_out)
+                self.infoScreen.setText(self.infoScreen.text()+"\n--Druckvorgang ist fertig.")   
+                # Close file and serial port
+                f.close()
+                s.close()
+            except:
+                self.infoScreen.setText(self.infoScreen.text()+"\n--Das G-Code-Verzeichnis ist falsch oder der es wurde nicht gefunden.")   
+                print("--Das G-Code-Verzeichnis ist falsch oder der es wurde nicht gefunden.")
+        except:
+            self.infoScreen.setText(self.infoScreen.text()+"\n--Der Zeichenroboter ist nicht angeschlossen oder es ist an den falschen Anschluss angeschlossen.")  
+            print("arduino bağlanmadı ya da arduino yanlış porta bağlı.")
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = main()
     widget.show()
     sys.exit(app.exec_())
-    

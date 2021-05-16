@@ -57,11 +57,6 @@ class Ui_mainWin(object):
         self.sendGcode.setFocusPolicy(Qt.StrongFocus)
         self.sendGcode.setStyleSheet(u"border-image:url(sendeGcode.png); \n"
 "")
-        self.infoScreen = QListWidget(self.centralwidget)
-        self.infoScreen.setObjectName(u"infoScreen")
-        self.infoScreen.setGeometry(QRect(1060, 50, 221, 321))
-        self.infoScreen.setStyleSheet(u"background: rgb(242, 241, 241);\n"
-"")
         self.plainTextEdit = QPlainTextEdit(self.centralwidget)
         self.plainTextEdit.setObjectName(u"plainTextEdit")
         self.plainTextEdit.setGeometry(QRect(1120, 400, 111, 31))
@@ -84,6 +79,11 @@ class Ui_mainWin(object):
         self.takePhoto.setSizePolicy(sizePolicy)
         self.takePhoto.setMinimumSize(QSize(100, 100))
         self.takePhoto.setStyleSheet(u"")
+        self.infoScreen = QLabel(self.centralwidget)
+        self.infoScreen.setObjectName(u"infoScreen")
+        self.infoScreen.setGeometry(QRect(1060, 52, 181, 311))
+        self.infoScreen.setStyleSheet(u"background-color: rgb(242, 241, 241);\n"
+"background : rgb(242, 241, 241)")
         mainWin.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(mainWin)
         self.menubar.setObjectName(u"menubar")
@@ -108,5 +108,6 @@ class Ui_mainWin(object):
         self.comboBox.setItemText(3, QCoreApplication.translate("mainWin", u"com 7", None))
 
         self.takePhoto.setText("")
+        self.infoScreen.setText(QCoreApplication.translate("mainWin", u"TextLabel", None))
     # retranslateUi
 

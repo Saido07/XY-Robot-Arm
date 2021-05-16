@@ -133,20 +133,6 @@
      <string/>
     </property>
    </widget>
-   <widget class="QListWidget" name="infoScreen">
-    <property name="geometry">
-     <rect>
-      <x>1060</x>
-      <y>50</y>
-      <width>221</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: rgb(242, 241, 241);
-</string>
-    </property>
-   </widget>
    <widget class="QPlainTextEdit" name="plainTextEdit">
     <property name="geometry">
      <rect>
@@ -225,6 +211,23 @@ outline : none;</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="infoScreen">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>52</y>
+      <width>181</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(242, 241, 241);
+background : rgb(242, 241, 241)</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
     </property>
    </widget>
   </widget>
