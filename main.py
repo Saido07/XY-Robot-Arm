@@ -42,48 +42,7 @@ class main(QMainWindow):
         call.takePhoto.setIconSize(size)
         call.takePhoto.setStyleSheet("border: 0px;")
 
-    def sendGClicked(self):
-        print("sendGCodeClicked")
-        parser = argparse.ArgumentParser(description='This is a basic gcode sender. http://crcibernetica.com')
-        parser.add_argument('-p','--port',help='Input USB port',required=True)
-        parser.add_argument('-f','--file',help='Gcode file name',required=True)
-        args = parser.parse_args()
-        
-        ## show values ##
-        print ("USB Port: %s" % args.port )
-        print ("Gcode file: %s" % args.file )
-        # Open serial port
-        #s = serial.Serial('/dev/ttyACM0',115200)
-        s = serial.Serial(args.port,9600)
-
-        
-        # Open g-code file
-        #f = open('/media/UNTITLED/shoulder.g','r');
-        f = open(args.file,'r')
-        # Wake up 
-        #s.write("\r\n\r\n") # Hit enter a few times to wake the Printrbot
-        time.sleep(2)   # Wait for Printrbot to initialize
-        s.flushInput()  # Flush startup text in serial input
-        
-        # Stream g-code
-        for line in f:
-            l = self.removeComment(line)
-            l = l.strip() # Strip all EOL characters for streaming
-            print(l)
-            if  (l.isspace()==False and len(l)>0) :
-                s.write((l + '\n').encode()) # Send g-code block
-                print('dd')
-                grbl_out = s.readline() # Wait for response with carriage return
-                print(grbl_out)
-        
-        # Wait here until printing is finished to close serial port and file.
-        input("  Press <Enter> to exit.")
-        
-        # Close file and serial port
-        f.close()
-        s.close()
-
-    def removeComment(string):
+    def removeComment(self, string):
         if (string.find(';')==-1):
             return string
         else:
@@ -181,8 +140,50 @@ class main(QMainWindow):
     def takePhotoClicked(self):
         self.logic=1
 
+    def sendGClicked(self):
+        self.sendG("com6", "D:\Projeler\mec308project\deneme.g")
+
+    def sendG(self, com, file):
+        print("sendGCodeClicked")
+        parser = argparse.ArgumentParser(description='This is a basic gcode sender. http://crcibernetica.com')
+        #parser.add_argument('-p','--port',help='Input USB port',required=True)
+        #parser.add_argument('-f','--file',help='Gcode file name',required=True)
+        args = parser.parse_args()
+        args.port=com
+        args.file=file
+        ## show values ##
+        print ("USB Port: %s" % args.port )
+        print ("Gcode file: %s" % args.file )
+        # Open serial port
+        #s = serial.Serial('/dev/ttyACM0',115200)
+        s = serial.Serial(args.port,9600)
+
+        
+        # Open g-code file
+        #f = open('/media/UNTITLED/shoulder.g','r');
+        f = open(args.file,'r')
+        # Wake up 
+        #s.write("\r\n\r\n") # Hit enter a few times to wake the Printrbot
+        time.sleep(2)   # Wait for Printrbot to initialize
+        s.flushInput()  # Flush startup text in serial input
+        
+        # Stream g-code
+        for line in f:
+            l = self.removeComment(line)
+            l = l.strip() # Strip all EOL characters for streaming
+            print(l)
+            if  (l.isspace()==False and len(l)>0) :
+                s.write((l + '\n').encode()) # Send g-code block
+                grbl_out = s.readline() # Wait for response with carriage return
+                print(grbl_out)
+        print("Robot görevi tamamladı!")     
+        # Close file and serial port
+        f.close()
+        s.close()
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = main()
     widget.show()
     sys.exit(app.exec_())
+    
