@@ -148,7 +148,6 @@ class main(QMainWindow):
     def sendGClicked(self):
         self.sendG("com6", "gCodes\deneme.g")
 
-
     def sendG(self, com, file):
         self.infoScreen.setText(self.infoScreen.text()+"\n--Der G-Code-Sendevorgang wurde gestartet und Druckvorgang wurde gestartet.")
         print("sendGCodeClicked")
