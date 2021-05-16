@@ -23,9 +23,13 @@ import imutils
 import serial
 import time
 import argparse
+import serial.tools.list_ports
+import winreg
+import itertools
 
 
 class main(QMainWindow):
+    Port=" "
     def __init__(self):
         super(main, self).__init__()
         self.setFixedSize(1300, 650)
@@ -33,6 +37,7 @@ class main(QMainWindow):
         call.camOn.clicked.connect(self.camClicked)
         call.sendGcode.clicked.connect(self.sendGClicked)
         call.takePhoto.clicked.connect(self.takePhotoClicked)
+        call.refreshPorts.clicked.connect(self.refreshPortClicked)
         self.infoScreen.setText("--")
         self.infoScreen.setFrameStyle(QFrame.Panel | QFrame.Sunken)
         self.infoScreen.setAlignment(Qt.AlignTop | Qt.AlignLeft)
@@ -45,6 +50,34 @@ class main(QMainWindow):
         size = QSize(100, 100)
         call.takePhoto.setIconSize(size)
         call.takePhoto.setStyleSheet("background:transparent")
+        imageRefresh = QIcon("reload.png")         
+        call.refreshPorts.setIcon(imageRefresh)
+        sizeRefresh = QSize(6,6)
+        call.refreshPorts.setIconSize(size)
+        call.refreshPorts.setStyleSheet("background:transparent")
+        self.serial_ports()
+        self.Port=self.comboBox.currentText()
+
+    def refreshPortClicked(self):
+        self.serial_ports()
+        self.Port=self.comboBox.currentText()
+
+    def serial_ports(self) -> list:
+        self.comboBox.clear()
+        path = 'HARDWARE\DEVICEMAP\SERIALCOMM'
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, path)
+
+        ports = []
+
+        for i in itertools.count():
+            try:
+                ports.append(winreg.EnumValue(key, i)[1])
+                self.comboBox.addItem(winreg.EnumValue(key, i)[1])
+            except EnvironmentError:
+                break
+           # print(ports)
+        return ports
+
 
     def removeComment(self, string):
         if (string.find(';')==-1):
@@ -146,7 +179,7 @@ class main(QMainWindow):
         self.logic=1
 
     def sendGClicked(self):
-        self.sendG("com6", "gCodes\deneme.g")
+        self.sendG(self.Port.lower(), "gCodes\deneme.g")
 
     def sendG(self, com, file):
         self.infoScreen.setText(self.infoScreen.text()+"\n--Der G-Code-Sendevorgang wurde gestartet und Druckvorgang wurde gestartet.")
