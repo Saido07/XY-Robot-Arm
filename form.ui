@@ -101,6 +101,7 @@
     </property>
     <property name="styleSheet">
      <string notr="true">border-image:url(camOn.png); 
+background:none;
 </string>
     </property>
     <property name="text">
@@ -127,6 +128,7 @@
     </property>
     <property name="styleSheet">
      <string notr="true">border-image:url(sendeGcode.png); 
+background:none;
 </string>
     </property>
     <property name="text">
@@ -238,7 +240,7 @@ background : rgb(242, 241, 241)</string>
      <x>0</x>
      <y>0</y>
      <width>1300</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
