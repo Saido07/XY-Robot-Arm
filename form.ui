@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>600</height>
+    <width>1300</width>
+    <height>820</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -50,10 +50,10 @@
    <widget class="QLabel" name="oriImage">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>140</y>
-      <width>260</width>
-      <height>210</height>
+      <x>90</x>
+      <y>50</y>
+      <width>400</width>
+      <height>400</height>
      </rect>
     </property>
     <property name="mouseTracking">
@@ -70,10 +70,10 @@
    <widget class="QLabel" name="workedImage">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>140</y>
-      <width>260</width>
-      <height>210</height>
+      <x>570</x>
+      <y>50</y>
+      <width>400</width>
+      <height>400</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -90,8 +90,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>380</y>
+      <x>200</x>
+      <y>520</y>
       <width>201</width>
       <height>31</height>
      </rect>
@@ -112,12 +112,12 @@
    </widget>
    <widget class="QPushButton" name="sendGcode">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>380</y>
+      <x>660</x>
+      <y>520</y>
       <width>201</width>
       <height>31</height>
      </rect>
@@ -133,46 +133,10 @@
      <string/>
     </property>
    </widget>
-   <widget class="QListWidget" name="infoScreen">
-    <property name="geometry">
-     <rect>
-      <x>760</x>
-      <y>20</y>
-      <width>221</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: rgb(242, 241, 241);
-</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>380</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <underline>true</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border : none;
-outline : none;</string>
-    </property>
-    <property name="plainText">
-     <string>Serial Port</string>
-    </property>
-   </widget>
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>800</x>
+      <x>1080</x>
       <y>440</y>
       <width>111</width>
       <height>22</height>
@@ -199,13 +163,81 @@ outline : none;</string>
      </property>
     </item>
    </widget>
+   <widget class="QPushButton" name="takePhoto">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>500</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="infoScreen">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>52</y>
+      <width>181</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(242, 241, 241);
+background : rgb(242, 241, 241)</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>410</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent</string>
+    </property>
+    <property name="text">
+     <string>Serial Port : </string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1300</width>
      <height>20</height>
     </rect>
    </property>
