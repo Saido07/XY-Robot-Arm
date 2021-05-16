@@ -142,7 +142,6 @@ class main(QMainWindow):
     def sendGClicked(self):
         self.sendG("com6", "gCodes\deneme.g")
 
-
     def sendG(self, com, file):
         print("sendGCodeClicked")
         parser = argparse.ArgumentParser(description='This is a basic gcode sender. http://crcibernetica.com')
