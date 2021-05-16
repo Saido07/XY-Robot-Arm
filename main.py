@@ -47,7 +47,6 @@ class main(QMainWindow):
             return string
         else:
             return string[:string.index(';')]
-
     
     def camClicked(self):
         print("camClicked")
@@ -141,7 +140,8 @@ class main(QMainWindow):
         self.logic=1
 
     def sendGClicked(self):
-        self.sendG("com6", "D:\Projeler\mec308project\deneme.g")
+        self.sendG("com6", "gCodes\deneme.g")
+
 
     def sendG(self, com, file):
         print("sendGCodeClicked")
