@@ -28,10 +28,19 @@ import argparse
 class main(QMainWindow):
     def __init__(self):
         super(main, self).__init__()
-        self.setFixedSize(1000, 600)
+        self.setFixedSize(1300, 650)
         call=uic.loadUi('form.ui',self)
         call.camOn.clicked.connect(self.camClicked)
         call.sendGcode.clicked.connect(self.sendGClicked)
+        call.takePhoto.clicked.connect(self.takePhotoClicked)
+        self.camOn.setVisible(True)
+        self.sendGcode.setVisible(True)
+        self.takePhoto.setVisible(False)
+        image = QIcon("camera.png")         
+        call.takePhoto.setIcon(image)
+        size = QSize(100, 100)
+        call.takePhoto.setIconSize(size)
+        call.takePhoto.setStyleSheet("border: 0px;")
 
     def sendGClicked(self):
         print("sendGCodeClicked")
@@ -80,13 +89,16 @@ class main(QMainWindow):
         else:
             return string[:string.index(';')]
 
-
+    
     def camClicked(self):
         print("camClicked")
         self.logic=0
         count=0
         self.oriImage.setVisible(True)
         self.workedImage.setVisible(True)
+        self.camOn.setVisible(False)
+        self.sendGcode.setVisible(False)
+        self.takePhoto.setVisible(True)
         print("Cam ON")
         cam = cv2.VideoCapture(0,cv2.CAP_DSHOW)
         kernel = np.ones((5,5), np.uint8)
@@ -131,21 +143,21 @@ class main(QMainWindow):
 
             if self.logic==2:
                 print("Cam OFF")
+                self.camOn.setVisible(True)
+                self.sendGcode.setVisible(True)
+                self.takePhoto.setVisible(False)
                 break                
             
             if self.logic==1:
-                print("Image "+str(count)+"saved")
-                file= os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')+'/'+str(count)+'.png'
-                cv2.imwrite(file, img)
-                
-                count +=1
+                self.displayImage(self.oriImage,img,1)
+                self.displayImage(self.workedImage,canny,1)
                 self.logic=2
 
         cam.release() 
         for i in range(1,10):
             cv2.destroyAllWindows()
             cv2.waitKey(1)
-        self.imgLabel.setVisible(False)
+        #self.imgLabel.setVisible(False)
         self.sendGcode.setVisible(True)
         self.oriImage.setVisible(True)
         self.logic=0 
@@ -164,6 +176,10 @@ class main(QMainWindow):
         img=img.rgbSwapped()
         lbl.setPixmap(QPixmap.fromImage(img))
         lbl.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
+
+
+    def takePhotoClicked(self):
+        self.logic=1
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
