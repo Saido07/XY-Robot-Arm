@@ -2,6 +2,7 @@
 import os
 from pathlib import Path
 import sys
+from typing import overload
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import * 
@@ -26,6 +27,8 @@ import argparse
 import serial.tools.list_ports
 import winreg
 import itertools
+from skimage.filters import threshold_local
+from imutils.perspective import four_point_transform
 
 
 class main(QMainWindow):
@@ -105,10 +108,6 @@ class main(QMainWindow):
             gray_frame = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             blur = cv2.GaussianBlur(gray_frame, (5,5), 0)
             canny = cv2.Canny(blur , 70, 200)
-
-            self.displayImage(self.oriImage,img,1)
-            self.displayImage(self.workedImage,canny,1)
-            #self.displayImage(canny,1)
             cv2.waitKey()
 
             cnts = cv2.findContours(canny.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -121,16 +120,15 @@ class main(QMainWindow):
                 if len(approx) == 4:
                     screenCnt = approx
                     break
-            #print("Die Kanten wird erkannt.")
-            #cv2.drawContours(frame, [screenCnt], -1, (0, 0, 255), 4)
+            
+            self.displayImage(self.oriImage,cv2.drawContours(img, [screenCnt], -1, (0, 0, 255), 4),1)
             #cv2.imshow("Die Kanten", frame_resized_3)
 
-            #warped = four_point_transform(frame, screenCnt.reshape(4, 2))
-            #warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
-            #T = threshold_local(warped, 11, offset=10, method="gaussian")
-            #warped = (warped > T).astype("uint8") * 255
-
-            #cv2.imshow("Scanned", imutils.resize(warped, height=400))
+            warped = four_point_transform(img, screenCnt.reshape(4, 2))
+            warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
+            T = threshold_local(warped, 11, offset=10, method="gaussian")
+            warped = (warped > T).astype("uint8") * 255
+            self.displayImage(self.workedImage,warped,1)
 
             if not ret:
                 break
@@ -180,9 +178,9 @@ class main(QMainWindow):
 
     def sendGClicked(self):
         self.sendG(self.Port.lower(), "gCodes\deneme.g")
-
+        self.infoScreen.setText(self.infoScreen.text()+"\n--Der G-Code-Sendevorgang wurde gestartet und Druckvorgang wurde gestartet.\n--\n--\n--")
+    
     def sendG(self, com, file):
-        self.infoScreen.setText(self.infoScreen.text()+"\n--Der G-Code-Sendevorgang wurde gestartet und Druckvorgang wurde gestartet.")
         print("sendGCodeClicked")
         parser = argparse.ArgumentParser(description='This is a basic gcode sender. http://crcibernetica.com')
         #parser.add_argument('-p','--port',help='Input USB port',required=True)
@@ -227,6 +225,7 @@ class main(QMainWindow):
         except:
             self.infoScreen.setText(self.infoScreen.text()+"\n--Der Zeichenroboter ist nicht angeschlossen oder es ist an den falschen Anschluss angeschlossen.")  
             print("arduino bağlanmadı ya da arduino yanlış porta bağlı.")
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = main()
