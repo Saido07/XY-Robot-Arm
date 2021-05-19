@@ -108,7 +108,7 @@ class main(QMainWindow):
             gray_frame = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             blur = cv2.GaussianBlur(gray_frame, (5,5), 0)
             canny = cv2.Canny(blur , 70, 200)
-            cv2.waitKey(1)
+            cv2.waitKey()
 
             cnts = cv2.findContours(canny.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
             cnts = imutils.grab_contours(cnts)
@@ -122,17 +122,15 @@ class main(QMainWindow):
                     break
             normal=-1
             k=cv2.waitKey(1)
+            ori=cv2.drawContours(img, [screenCnt], -1, (0, 0, 255), 4)
             try:
-                self.displayImage(self.oriImage,cv2.drawContours(img, [screenCnt], -1, (0, 0, 255), 4),1)
+                self.displayImage(self.oriImage,ori,1)
                 #cv2.imshow("Die Kanten", frame_resized_3)
-
                 warped = four_point_transform(img, screenCnt.reshape(4, 2))
                 warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
                 T = threshold_local(warped, 11, offset=10, method="gaussian")
                 warped = (warped > T).astype("uint8") * 255
-                cv2.waitKey(5)
-                cv2.imwrite('myImage.png',warped)
-                self.displayImage(self.workedImage,cv2.imread('myImage.png'),1)
+                self.displayImage(self.workedImage,warped,1)
                 normal=0
             except:
                 self.displayImage(self.oriImage,img,1)
@@ -152,47 +150,16 @@ class main(QMainWindow):
             
             if self.logic==1:
                 self.infoScreen.setText(self.infoScreen.text()+"\n--Das Foto wurde gemacht.") 
-                gray_frame = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                blur = cv2.GaussianBlur(gray_frame, (5,5), 0)
-                canny = cv2.Canny(blur , 70, 200)
-                cv2.waitKey(1)
-
-                cnts = cv2.findContours(canny.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-                cnts = imutils.grab_contours(cnts)
-                cnts = sorted(cnts, key=cv2.contourArea, reverse=True)[:5]
-
-                for c in cnts:
-                    peri = cv2.arcLength(c, True)
-                    approx = cv2.approxPolyDP(c, 0.03 * peri, True)
-                    if len(approx) == 4:
-                        screenCnt = approx
-                        break
-                normal=-1
-                k=cv2.waitKey(1)
-                try:
-                    self.displayImage(self.oriImage,cv2.drawContours(img, [screenCnt], -1, (0, 0, 255), 4),1)
-                    #cv2.imshow("Die Kanten", frame_resized_3)
-
-                    warped = four_point_transform(img, screenCnt.reshape(4, 2))
-                    warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
-                    T = threshold_local(warped, 11, offset=10, method="gaussian")
-                    warped = (warped > T).astype("uint8") * 255
-                    cv2.waitKey(5)
-                    cv2.imwrite('myImage.png',warped)
-                    self.displayImage(self.workedImage,cv2.imread('myImage.png'),1)
-                    normal=0
-                except:
-                    self.displayImage(self.oriImage,img,1)
-                    self.displayImage(self.workedImage,canny,1)
-                    normal=1
                 if normal==0:
+                    cv2.imwrite('myImage.png',warped)
                     self.displayImage(self.oriImage,cv2.drawContours(img, [screenCnt], -1, (0, 0, 255), 4),1)
-                    self.displayImage(self.workedImage,warped,1)
+                    self.displayImage(self.workedImage,cv2.imread('myImage.png'),1)
                 elif normal==1:
+                    cv2.imwrite('myImage.png',canny)
                     self.displayImage(self.oriImage,img,1)
-                    self.displayImage(self.workedImage,canny,1)
-                normal=-1
+                    self.displayImage(self.workedImage,cv2.imread('myImage.png'),1)
                 self.logic=2
+                normal=-1
 
         cam.release() 
         for i in range(1,10):
