@@ -122,15 +122,15 @@ class main(QMainWindow):
                     break
             normal=-1
             k=cv2.waitKey(1)
-            ori=cv2.drawContours(img, [screenCnt], -1, (0, 0, 255), 4)
             try:
-                self.displayImage(self.oriImage,ori,1)
+                ori=cv2.drawContours(img, [screenCnt], -1, (0, 0, 255), 4)
                 #cv2.imshow("Die Kanten", frame_resized_3)
                 warped = four_point_transform(img, screenCnt.reshape(4, 2))
                 warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
                 T = threshold_local(warped, 11, offset=10, method="gaussian")
                 warped = (warped > T).astype("uint8") * 255
-                self.displayImage(self.workedImage,warped,1)
+                self.displayImage(self.workedImage,imutils.resize(warped, 400,400),1)
+                self.displayImage(self.oriImage,ori,1)
                 normal=0
             except:
                 self.displayImage(self.oriImage,img,1)
@@ -151,7 +151,7 @@ class main(QMainWindow):
             if self.logic==1:
                 self.infoScreen.setText(self.infoScreen.text()+"\n--Das Foto wurde gemacht.") 
                 if normal==0:
-                    cv2.imwrite('myImage.png',warped)
+                    cv2.imwrite('myImage.png',imutils.resize(warped, 400,400))
                     self.displayImage(self.oriImage,cv2.drawContours(img, [screenCnt], -1, (0, 0, 255), 4),1)
                     self.displayImage(self.workedImage,cv2.imread('myImage.png'),1)
                 elif normal==1:
@@ -160,7 +160,7 @@ class main(QMainWindow):
                     self.displayImage(self.workedImage,cv2.imread('myImage.png'),1)
                 self.logic=2
                 normal=-1
-
+        
         cam.release() 
         for i in range(1,10):
             cv2.destroyAllWindows()
@@ -169,6 +169,7 @@ class main(QMainWindow):
         self.sendGcode.setVisible(True)
         self.oriImage.setVisible(True)
         self.logic=0 
+        screenCnt=None
     
     def displayImage(self,lbl, img,window=1):
         qformat=QImage.Format_Indexed8
@@ -190,8 +191,9 @@ class main(QMainWindow):
         self.logic=1
 
     def sendGClicked(self):
-        self.sendG(self.Port.lower(), "gCodes\deneme.g")
         self.infoScreen.setText(self.infoScreen.text()+"\n--Der G-Code-Sendevorgang wurde gestartet und Druckvorgang wurde gestartet.\n--\n--\n--")
+        self.sendG(self.Port.lower(), "gCodes\deneme.g")
+
     
     def sendG(self, com, file):
         print("sendGCodeClicked")
@@ -239,8 +241,10 @@ class main(QMainWindow):
             self.infoScreen.setText(self.infoScreen.text()+"\n--Der Zeichenroboter ist nicht angeschlossen oder es ist an den falschen Anschluss angeschlossen.")  
             print("arduino bağlanmadı ya da arduino yanlış porta bağlı.")
 
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = main()
     widget.show()
     sys.exit(app.exec_())
+    
