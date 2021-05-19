@@ -130,7 +130,9 @@ class main(QMainWindow):
                 warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
                 T = threshold_local(warped, 11, offset=10, method="gaussian")
                 warped = (warped > T).astype("uint8") * 255
-                self.displayImage(self.workedImage,warped,1)
+                cv2.waitKey(5)
+                cv2.imwrite('myImage.png',warped)
+                self.displayImage(self.workedImage,cv2.imread('myImage.png'),1)
                 normal=0
             except:
                 self.displayImage(self.oriImage,img,1)
@@ -175,7 +177,9 @@ class main(QMainWindow):
                     warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
                     T = threshold_local(warped, 11, offset=10, method="gaussian")
                     warped = (warped > T).astype("uint8") * 255
-                    self.displayImage(self.workedImage,warped,1)
+                    cv2.waitKey(5)
+                    cv2.imwrite('myImage.png',warped)
+                    self.displayImage(self.workedImage,cv2.imread('myImage.png'),1)
                     normal=0
                 except:
                     self.displayImage(self.oriImage,img,1)
