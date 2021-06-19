@@ -235,7 +235,7 @@ class main(QMainWindow):
     def sendGClicked(self):
         self.infoScreen.setText(self.infoScreen.text()+"\n--Der G-Code-Sendevorgang wurde gestartet und Druckvorgang wurde gestartet.\n--\n--\n--")
         self.Port=self.comboBox.currentText()
-        self.sendG(self.Port.lower(), "gCodes\deneme.g")
+        self.sendG(self.Port.lower(), "Scanned\myImage.gcode")
 
     
     def sendG(self, com, file):
