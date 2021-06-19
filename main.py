@@ -22,14 +22,13 @@ import cv2
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QImage, QPalette, QBrush
 import numpy as np
-import utlis
 import serial
 import time
 import argparse
 import serial.tools.list_ports
 import winreg
+import utlis
 import itertools
-import imutils
 from skimage.filters import threshold_local
 from imutils.perspective import four_point_transform
 
@@ -51,6 +50,14 @@ class main(QMainWindow):
         self.camOn.setVisible(True)
         self.sendGcode.setVisible(True)
         self.takePhoto.setVisible(False)
+        self.bar1.setVisible(False)
+        self.bar2.setVisible(False)
+        self.t1.setVisible(False)
+        self.t2.setVisible(False)
+        self.bar1.setStyleSheet("background:transparent")
+        self.bar2.setStyleSheet("background:transparent")
+        self.t1.setStyleSheet("background:transparent")
+        self.t2.setStyleSheet("background:transparent")
         image = QIcon("camera.png")         
         call.takePhoto.setIcon(image)
         size = QSize(100, 100)
@@ -96,13 +103,22 @@ class main(QMainWindow):
         print("camClicked")
         self.infoScreen.setText(self.infoScreen.text()+"\n--Die Kamera war eingeschaltet.")  
         self.logic=0
-        utlis.initializeTrackbars()
+        self.bar1.setMaximum(255)
+        self.bar1.setMinimum(0)
+        self.bar2.setMaximum(255)
+        self.bar2.setMinimum(0)
+        self.bar2.setValue(200)
+        self.bar1.setValue(200)
         count = 0
         self.oriImage.setVisible(True)
         self.workedImage.setVisible(True)
         self.camOn.setVisible(False)
         self.sendGcode.setVisible(False)
         self.takePhoto.setVisible(True)
+        self.bar1.setVisible(True)
+        self.bar2.setVisible(True)
+        self.t1.setVisible(True)
+        self.t2.setVisible(True)
         print("Cam ON")
         widthImg = 400
         heightImg = 400
@@ -117,8 +133,7 @@ class main(QMainWindow):
             imgBlank = np.zeros((heightImg, widthImg, 3), np.uint8)  # CREATE A BLANK IMAGE FOR TESTING DEBUGING IF REQUIRED
             imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # CONVERT IMAGE TO GRAY SCALE
             imgBlur = cv2.GaussianBlur(imgGray, (5, 5), 1)  # ADD GAUSSIAN BLUR
-            thres = utlis.valTrackbars()  # GET TRACK BAR VALUES FOR THRESHOLDS
-            imgThreshold = cv2.Canny(imgBlur, thres[0], thres[1])  # APPLY CANNY BLUR
+            imgThreshold = cv2.Canny(imgBlur, self.bar1.value(), self.bar2.value())  # APPLY CANNY BLUR
             kernel = np.ones((5, 5))
             imgDial = cv2.dilate(imgThreshold, kernel, iterations=2)  # APPLY DILATION
             imgThreshold = cv2.erode(imgDial, kernel, iterations=1)  # APPLY EROSION
@@ -180,6 +195,10 @@ class main(QMainWindow):
                 self.camOn.setVisible(True)
                 self.sendGcode.setVisible(True)
                 self.takePhoto.setVisible(False)
+                self.bar1.setVisible(False)
+                self.bar2.setVisible(False)
+                self.t1.setVisible(False)
+                self.t2.setVisible(False)
                 break 
 
             # SAVE IMAGE WHEN 's' key is pressed
